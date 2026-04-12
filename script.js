@@ -25,24 +25,21 @@ const inventory = [
 ];
 
 // This function builds the HTML for each product
-function renderShop() {
+
+    function renderShop() {
     const grid = document.getElementById('product-grid');
-    if (!grid) return; // Only runs if we are on the shop page
+    if (!grid) return;
 
-    grid.innerHTML = ""; // Clear the "Loading" text
-
-    inventory.forEach(item => {
-        const card = `
-            <div class="product-card">
-                <img src="${item.img}" alt="${item.name}" class="product-img">
-                <h3>${item.name}</h3>
-                <p class="price">${item.price}</p>
-                <a href="https://wa.me/YOURNUMBER?text=Hi, I'm interested in the ${item.name}" class="btn-buy">Inquire via WhatsApp</a>
-            </div>
-        `;
-        grid.innerHTML += card;
-    });
+    grid.innerHTML = inventory.map(item => `
+        <div class="product-card">
+            <img src="${item.img}" alt="${item.name}" class="product-img">
+            <h3>${item.name}</h3>
+            <p class="price">${item.price}</p>
+            <a href="https://wa.me/+9647759530163?text=areed in: ${item.name}" class="btn-buy">
+                Chat to Order
+            </a>
+        </div>
+    `).join('');
 }
 
-// Run the function when the page loads
 window.onload = renderShop;

@@ -240,3 +240,148 @@ footer { text-align: center; padding: 60px 20px; background: var(--light-gray); 
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
 }
+
+
+/* --- Modern Boutique Theme --- */
+:root {
+    --primary: #000000;
+    --accent: #666666;
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --surface: #fafafa;
+    --whatsapp: #25D366;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation: Slim & Floating */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 5%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 900;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.nav-links { list-style: none; display: flex; gap: 40px; }
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--text); 
+    font-size: 0.75rem; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.3s opacity;
+}
+.nav-links a:hover { opacity: 0.5; }
+
+/* Shop Header: Minimalist */
+.shop-header {
+    padding: 120px 5% 60px;
+    text-align: center;
+}
+
+.shop-header h1 { 
+    font-size: clamp(2rem, 8vw, 4rem); 
+    font-weight: 300; 
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+/* Product Grid: High Density */
+.shop-section { padding: 0 5% 100px; max-width: 1600px; margin: 0 auto; }
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    position: relative;
+    padding-bottom: 40px;
+    transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.product-img {
+    width: 100%;
+    aspect-ratio: 3/4; /* Classic fashion photography ratio */
+    object-fit: cover;
+    background: var(--surface);
+    transition: 0.5s filter;
+}
+
+.product-card:hover .product-img {
+    filter: brightness(0.9);
+}
+
+.product-card h3 { 
+    font-size: 0.9rem; 
+    font-weight: 500; 
+    margin: 15px 0 5px; 
+    text-transform: uppercase;
+}
+
+.price { 
+    font-size: 0.85rem; 
+    color: var(--accent); 
+    margin-bottom: 20px; 
+}
+
+/* The "Chat" Button: Modern Pill Style */
+.btn-buy {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.btn-buy:hover {
+    background: #333333;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Footer */
+footer {
+    padding: 80px 5%;
+    border-top: 1px solid #eee;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* Hide links on mobile for a cleaner look */
+}
