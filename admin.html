@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop Admin</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; background: #f0f2f5; }
+        .box { background: white; padding: 20px; border-radius: 8px; max-width: 400px; margin: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #000; color: #fff; border: none; cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div id="login-box" class="box">
+    <h2>Seller Login</h2>
+    <select id="shop-select">
+        <option value="shop_001">Urban Streetwear Co.</option>
+        <option value="shop_002">Minimalist Wardrobe</option>
+    </select>
+    <input type="password" id="admin-pass" placeholder="Enter Shop Passkey">
+    <button onclick="attemptLogin()">Login</button>
+</div>
+
+<div id="admin-dashboard" class="box" style="display:none; max-width: 600px;">
+    <h2 id="display-shop-name">Editing Store</h2>
+    
+    <div style="border-bottom: 1px solid #ddd; padding-bottom: 20px; margin-bottom: 20px;">
+        <h3>Add New Product</h3>
+        <input type="text" id="p-name" placeholder="Product Name">
+        <input type="text" id="p-cat" placeholder="Category">
+        <input type="number" id="p-price" placeholder="Price">
+        <input type="text" id="p-img" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div>
+        <h3>Manage Existing Products</h3>
+        <div id="product-list-container">
+            </div>
+    </div>
+
+    <button onclick="location.reload()" style="background:#666; margin-top:20px;">Logout</button>
+</div>
+
+    </div>
+
+    <script>
+        // 1. THE CREDENTIAL MAP
+// In a real app, this would be in a database. For now, it's our "Gatekeeper."
+const shopKeys = {
+    "shop_001": "000",  // Key for Urban Streetwear
+    "shop_002": "000",     // Key for Minimalist Wardrobe
+    "shop_003": "000"     // Example for another shop
+};
+
+let currentShopId = "";
+
+function attemptLogin() {
+    const selectedShop = document.getElementById('shop-select').value;
+    const enteredPass = document.getElementById('admin-pass').value; // Make sure your input ID matches this
+
+    if (shopKeys[selectedShop] === enteredPass) {
+        // SUCCESS: Authorization granted
+        currentShopId = selectedShop;
+        
+        // UI Changes
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'block';
+        document.getElementById('display-shop-name').innerText = "Editing: " + selectedShop;
+        
+
+        
+        console.log("Authorized for: " + currentShopId);
+    } else {
+        alert("Incorrect passkey for this specific shop.");
+    }
+
+    function attemptLogin() {
+    const selectedShop = document.getElementById('shop-select').value;
+    const enteredPass = document.getElementById('admin-pass').value;
+
+    if (shopKeys[selectedShop] === enteredPass) {
+        currentShopId = selectedShop; // This MUST be set
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'block';
+        
+function attemptLogin() {
+    const selectedShop = document.getElementById('shop-select').value;
+    const enteredPass = document.getElementById('admin-pass').value;
+
+    if (shopKeys[selectedShop] === enteredPass) {
+        currentShopId = selectedShop; // This MUST be set
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'block';
+        
+        // This is the line that actually builds the table!
+        renderInventoryList(); 
+    } else {
+        alert("Wrong key.");
+    }
+}
+
+        // This is the line that actually builds the table!
+        renderInventoryList(); 
+    } else {
+        alert("Wrong key.");
+    }
+}
+
+}
+        function addProduct() {
+            const shopId = document.getElementById('shop-select').value;
+            const name = document.getElementById('p-name').value;
+            const cat = document.getElementById('p-cat').value;
+            const price = document.getElementById('p-price').value;
+            const img = document.getElementById('p-img').value;
+
+            if(!name || !cat || !price || !img) return alert("Fill everything!");
+
+            // 1. Load current storage
+            let data = JSON.parse(localStorage.getItem('custom_inventory')) || {};
+
+            // 2. Initialize shop/category if empty
+            if (!data[shopId]) data[shopId] = {};
+            if (!data[shopId][cat]) data[shopId][cat] = [];
+
+            // 3. Add item
+            data[shopId][cat].push({
+                name: name,
+                price: parseFloat(price),
+                image: img
+            });
+
+            // 4. Save back
+            localStorage.setItem('custom_inventory', JSON.stringify(data));
+            alert("Success! Check your storefront.");
+
+            
+        }
+    </script>
+</body>
+</html>
